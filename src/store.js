@@ -1,17 +1,23 @@
 import { createStore } from "redux";
 let initialState = {
   courseExchange: {},
-  ArrayCourseExchange: [],
-  baseСurrency: "",
+  resultChangeCurrency: "",
+  arrayCourseExchange: [],
+  arrayQueryChangeCurrency: [],
+  baseСurrency: "UAH",
 };
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case "courseExchange":
+    case "setCourseExchange":
       return { ...state, courseExchange: { ...action.payload } };
-    case "baseСurrency":
+    case "setBaseСurrency":
       return { ...state, baseСurrency: action.payload };
     case "arrayCourseExchange":
-      return { ...state, ArrayCourseExchange: [...action.payload] };
+      return { ...state, arrayCourseExchange: [...action.payload] };
+    case "queryChangeCurrency":
+      return { ...state, arrayQueryChangeCurrency: [...action.payload] };
+    case "getResultChangeCurrency":
+      return { ...state, resultChangeCurrency: action.payload };
     default:
       return state;
   }

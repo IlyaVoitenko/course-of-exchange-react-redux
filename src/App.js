@@ -1,13 +1,38 @@
 import "./App.css";
-import FetchCourses from "./components/FetchCourses";
+import useCourses from "./components/useCourses";
+import ParseCourseExchange from "./components/PasreCourseExchange";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import ShowCourseExchange from "./components/ShowCourseExchange";
-import PasreCourseExchange from "./components/PasreCourseExchange";
+import ChangeCurrency from "./components/ChangeCurrency";
 function App() {
-  FetchCourses();
-  PasreCourseExchange();
+  useCourses();
+  ParseCourseExchange();
   return (
     <div className="App">
-      <ShowCourseExchange />
+      <div>
+        <Router>
+          <div>
+            <nav>
+              <ul>
+                <li>
+                  <Link to="/">ShowCourseExchange</Link>
+                </li>
+                <li>
+                  <Link to="/ChangeCurrency">ChangeCurrency</Link>
+                </li>
+              </ul>
+            </nav>
+            <Switch>
+              <Route path="/ChangeCurrency">
+                <ChangeCurrency />
+              </Route>
+              <Route path="/">
+                <ShowCourseExchange />
+              </Route>
+            </Switch>
+          </div>
+        </Router>
+      </div>
     </div>
   );
 }

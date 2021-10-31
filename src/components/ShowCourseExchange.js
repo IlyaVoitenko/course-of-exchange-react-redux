@@ -1,17 +1,12 @@
 import { React } from "react";
 import { useSelector } from "react-redux";
-
+import ExchangeItem from "./ExchangeItem";
 const ShowCourseExchange = () => {
-  const ArrayCourseExchange = useSelector((state) => state.ArrayCourseExchange);
-  const baseСurrency = useSelector((state) => state.baseСurrency);
+  const arrayCourseExchange = useSelector((state) => state.arrayCourseExchange);
   return (
     <div>
-      {ArrayCourseExchange.map((item, index) => {
-        return (
-          <div key={index}>
-            1 {baseСurrency} = {item.value} {item.exchange}
-          </div>
-        );
+      {arrayCourseExchange.map((item, index) => {
+        return <ExchangeItem item={item} index={index} />;
       })}
     </div>
   );
