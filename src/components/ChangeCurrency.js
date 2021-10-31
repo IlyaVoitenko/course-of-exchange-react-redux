@@ -2,14 +2,28 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 const ChangeCurrency = () => {
-  const arrayCourseExchange = useSelector((state) => state.arrayCourseExchange);
-  const arrayQueryChangeCurrency = useSelector(
-    (state) => state.arrayQueryChangeCurrency
-  );
+  const courseExchange = useSelector((state) => state.courseExchange);
   const resultChangeCurrency = useSelector(
     (state) => state.resultChangeCurrency
   );
-  //on click logic  to function
+  function resultChangeCurrencyFun(courseExchange) {
+    let resEntriesCourseExchange = Object.entries(courseExchange);
+    let valueChangeCurrency = +arrayQueryChangeCurrency[0];
+    let valueSecondChangeCurrency = arrayQueryChangeCurrency[3];
+    let resFind = resEntriesCourseExchange.find(
+      (item) => item[0] === valueSecondChangeCurrency
+    );
+    let resultChange = Math.floor(valueChangeCurrency * resFind[1] * 100) / 100;
+    console.log(valueChangeCurrency * resFind[1]);
+    console.log(resultChange);
+    dispatch({
+      type: "getResultChangeCurrency",
+      payload: resultChange,
+    });
+  }
+  const arrayQueryChangeCurrency = useSelector(
+    (state) => state.arrayQueryChangeCurrency
+  );
   const dispatch = useDispatch();
   return (
     <div>
@@ -26,30 +40,11 @@ const ChangeCurrency = () => {
       ></input>
       <span>{resultChangeCurrency} </span>
       <p>
-        <button
-          onClick={() => {
-            let valueChangeCurrency = +arrayQueryChangeCurrency[0];
-            //USD  valueFirstChangeCurrency base currency
-            //let valueFirstChangeCurrency = arrayQueryChangeCurrency[1];
-            let valueSecondChangeCurrency = arrayQueryChangeCurrency[3];
-            //change on courseExchange to  object.entries()
-            //change forEach to Find()
-            //create a new branch in git
-            arrayCourseExchange.forEach((element) => {
-              if (valueSecondChangeCurrency === element.exchange) {
-                let result = element.value * valueChangeCurrency;
-                dispatch({
-                  type: "resultChangeCurrency",
-                  payload: Math.floor(result * 100) / 100,
-                });
-              }
-            });
-          }}
-        >
+        <button onClick={() => resultChangeCurrencyFun(courseExchange)}>
           Result
         </button>
       </p>
-      <span> example format input: 15 USD in UAH </span>
+      <span> example format input: 15 USD in CNY </span>
     </div>
   );
 };

@@ -2,11 +2,11 @@ import { React } from "react";
 import { useSelector } from "react-redux";
 import ExchangeItem from "./ExchangeItem";
 const ShowCourseExchange = () => {
-  const arrayCourseExchange = useSelector((state) => state.arrayCourseExchange);
+  const courseExchange = useSelector((state) => state.courseExchange);
   return (
     <div>
-      {arrayCourseExchange.map((item, index) => {
-        return <ExchangeItem item={item} index={index} />;
+      {Object.entries(courseExchange).map(([key, value], index) => {
+        return <ExchangeItem key={index} item={[key, value]} index={index} />;
       })}
     </div>
   );
