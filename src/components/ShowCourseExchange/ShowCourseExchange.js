@@ -1,6 +1,6 @@
 import { React } from "react";
 import { useSelector } from "react-redux";
-import ExchangeItem from "./ExchangeItem";
+import ExchangeItem from "../ExchangeItem";
 const ShowCourseExchange = () => {
   const courseExchange = useSelector((state) => state.courseExchange);
   return (

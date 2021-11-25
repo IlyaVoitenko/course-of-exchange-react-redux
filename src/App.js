@@ -1,36 +1,24 @@
 import "./App.css";
-import useCourses from "./components/useCourses";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import ShowCourseExchange from "./components/ShowCourseExchange";
+import useCourses from "./components/useCourses/useCourses";
+import Navigate from "./components/Navigate/Navigate";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import ChangeCurrency from "./components/ChangeCurrency";
+import ShowCourseExchange from "./components/ShowCourseExchange";
 function App() {
   useCourses();
   return (
     <div className="App">
-      <div>
-        <Router>
-          <div>
-            <nav>
-              <ul>
-                <li>
-                  <Link to="/">ShowCourseExchange</Link>
-                </li>
-                <li>
-                  <Link to="/ChangeCurrency">ChangeCurrency</Link>
-                </li>
-              </ul>
-            </nav>
-            <Switch>
-              <Route path="/ChangeCurrency">
-                <ChangeCurrency />
-              </Route>
-              <Route path="/">
-                <ShowCourseExchange />
-              </Route>
-            </Switch>
-          </div>
-        </Router>
-      </div>
+      <BrowserRouter>
+        <Navigate />
+        <Switch>
+          <Route path="/ChangeCurrency">
+            <ChangeCurrency />
+          </Route>
+          <Route path="/">
+            <ShowCourseExchange />
+          </Route>
+        </Switch>
+      </BrowserRouter>
     </div>
   );
 }
