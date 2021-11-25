@@ -5,7 +5,10 @@ import {
   getCourseExchange,
   getArrayQueryChangeCurrency,
 } from "./selectors";
-import { ResultExchangeRate } from "./helper/ResultExchangeRate";
+import {
+  resultExchangeRate,
+  getRequesChangeCurrency,
+} from "./helper/ResultExchangeRate";
 const ChangeCurrency = () => {
   const resultChangeCurrency = useSelector(getResultChangeCurrency);
   const arrayQueryChangeCurrency = useSelector(getArrayQueryChangeCurrency);
@@ -16,13 +19,12 @@ const ChangeCurrency = () => {
       <input
         type="text"
         placeholder="enter value"
-        onChange={({ target }) => {
-          let enteredString = target.value.split(" ");
+        onChange={({ target }) =>
           dispatch({
             type: "queryChangeCurrency",
-            payload: enteredString,
-          });
-        }}
+            payload: getRequesChangeCurrency(target),
+          })
+        }
       ></input>
       <span>{resultChangeCurrency} </span>
       <p>
@@ -30,7 +32,7 @@ const ChangeCurrency = () => {
           onClick={() =>
             dispatch({
               type: "getResultChangeCurrency",
-              payload: ResultExchangeRate(
+              payload: resultExchangeRate(
                 arrayQueryChangeCurrency,
                 courseExchange
               ),
